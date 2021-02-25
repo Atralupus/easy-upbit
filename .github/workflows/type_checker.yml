@@ -1,0 +1,32 @@
+name: TypeCheck
+
+on:
+  push:
+    paths:
+      - ".github/**"
+      - "upbit/**"
+      - "*.py"
+      - "setup.cfg"
+
+jobs:
+  type-check-easy-upbit:
+    name: Type Check easy upbit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.5
+
+      - name: Type check with mypy
+        env:
+          TARGET_ROOT: easy-upbit
+        run: |
+          pip install -U pip mypy
+          mypy $TARGET_ROOT
+
