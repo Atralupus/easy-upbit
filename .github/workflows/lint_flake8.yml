@@ -1,0 +1,31 @@
+name: Lint
+
+on:
+  push:
+    paths:
+      - ".github/**"
+      - "upbit/**"
+      - "*.py"
+
+jobs:
+  linting-easy-upbit:
+    name: Lint easy upbit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.5
+
+      - name: Lint with flake8
+        env:
+          TARGET_ROOT: upbit
+        run: |
+          pip install -U pip flake8
+          cd $TARGET_ROOT
+          flake8
