@@ -10,5 +10,6 @@ setup(
         "attrs>=19.3.0",
         "pytz>=2020.1",
         "requests>=2.25.1",
+        "requests-toolbelt>=0.9.1",
     ],
 )
